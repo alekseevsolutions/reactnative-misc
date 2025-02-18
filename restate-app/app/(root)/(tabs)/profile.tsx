@@ -55,6 +55,7 @@ const Profile = () => {
             refetch();
         } else {
             Alert.alert("Error", "Failed to logout");
+            refetch();
         }
     };
 

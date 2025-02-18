@@ -1,6 +1,9 @@
-import {createContext, ReactNode, useContext} from "react";
-import {useAppwrite} from "@/lib/useAppwrite"
-import { getCurrentUser } from "./appwrite"
+import React, { createContext, useContext, ReactNode } from "react";
+
+import { getCurrentUser } from "./appwrite";
+import { useAppwrite } from "./useAppwrite";
+import { Redirect } from "expo-router";
+
 
 interface User {
     $id: string;
