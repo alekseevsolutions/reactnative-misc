@@ -1,4 +1,4 @@
-import {SafeAreaView, Text, View, Image, TouchableOpacity, FlatList} from "react-native";
+import {SafeAreaView, Text, View, Image, TouchableOpacity, FlatList, ActivityIndicator} from "react-native";
 import {Link, router, useLocalSearchParams} from 'expo-router';
 import images from "@/constants/images";
 import icons from "@/constants/icons";
@@ -9,6 +9,7 @@ import {useGlobalContext} from "@/lib/global-provider";
 import {useAppwrite} from "@/lib/useAppwrite";
 import {getLatestProperties, getProperties} from "@/lib/appwrite";
 import {useEffect} from "react";
+import NoResults from "@/components/NoResults";
 
 export default function Index() {
     const { user } = useGlobalContext();
@@ -48,6 +49,9 @@ export default function Index() {
             contentContainerClassName="pb-32"
             columnWrapperClassName="flex gap-5 px-5"
             showsVerticalScrollIndicator={false}
+            ListEmptyComponent={
+                loading ? ( <ActivityIndicator size="large" className="text-primary-300 mt-5" /> ) : <NoResults />
+        }
             ListHeaderComponent={
                 <View className="px-5">
                     <View className="flex flex-row items-center justify-between mt-5">
@@ -71,6 +75,7 @@ export default function Index() {
                                 <Text className="text-base font-rubik-bold text-primary-300">See All</Text>
                             </TouchableOpacity>
                         </View>
+                        {latestPropertiesLoading ? <ActivityIndicator size="large" className="text-primary-300" /> : !latestProperties || latestProperties.length === 0 ? <NoResults /> : (
                         <FlatList
                             data={latestProperties}
                             renderItem={({item}) => <FeatureCard item={item} onPress={() => handleCardPress(item.$id)}/>}
@@ -79,7 +84,8 @@ export default function Index() {
                             bounces={false}
                             showsHorizontalScrollIndicator={false}
                             contentContainerClassName="flex gap-5 mt-5"
-                            />
+                            />)
+                        }
 
                     </View>
 
