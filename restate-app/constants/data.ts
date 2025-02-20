@@ -55,16 +55,16 @@ export const featuredCards = [
   },
 ];
 
-export const categories = [
-  { title: "All", category: "All" },
-  { title: "Houses", category: "House" },
-  { title: "Condos", category: "Condos" },
-  { title: "Duplexes", category: "Duplexes" },
-  { title: "Studios", category: "Studios" },
-  { title: "Villas", category: "Villa" },
-  { title: "Apartments", category: "Apartments" },
-  { title: "Townhomes", category: "Townhomes" },
-  { title: "Others", category: "Others" },
+export const types = [
+  { title: "All", type: "All" },
+  { title: "House", type: "House" },
+  { title: "Condo", type: "Condo" },
+  { title: "Duplexes", type: "Duplex" },
+  { title: "Studios", type: "Studio" },
+  { title: "Villas", type: "Villa" },
+  { title: "Apartments", type: "Apartment" },
+  { title: "Townhomes", type: "Townhouse" },
+  { title: "Others", type: "Other" },
 ];
 
 export const settings = [
