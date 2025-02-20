@@ -1,4 +1,4 @@
-import {SafeAreaView, Text, View, Image, TouchableOpacity, FlatList, ActivityIndicator} from "react-native";
+import {SafeAreaView, Text, View, Image, TouchableOpacity, FlatList, ActivityIndicator, Button} from "react-native";
 import {Link, router, useLocalSearchParams} from 'expo-router';
 import images from "@/constants/images";
 import icons from "@/constants/icons";
@@ -10,6 +10,7 @@ import {useAppwrite} from "@/lib/useAppwrite";
 import {getLatestProperties, getProperties} from "@/lib/appwrite";
 import {useEffect} from "react";
 import NoResults from "@/components/NoResults";
+// import seed from "@/lib/seed";
 
 export default function Index() {
     const { user } = useGlobalContext();
@@ -31,16 +32,17 @@ export default function Index() {
 
     const handleCardPress = (id: string) => router.push (`/properties/${id}`);
 
-    useEffect(()=> {
+    useEffect(() => {
         refetch({
             filter: params.filter!,
             query: params.query!,
             limit: 6,
-        })
-    })
+        });
+    }, [params.filter, params.query]);
 
     return (
-    <SafeAreaView className="bg-white h-full">
+        <SafeAreaView className="bg-white h-full">
+            {/*<Button title="seed" onPress={seed} />*/}
         <FlatList
             data={properties}
             renderItem={({item}) => <Card item={item} onPress={() => handleCardPress(item.$id)}/>}
@@ -86,7 +88,6 @@ export default function Index() {
                             contentContainerClassName="flex gap-5 mt-5"
                             />)
                         }
-
                     </View>
 
                     <View className="flex flex-row items-center justify-between">
